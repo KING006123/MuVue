@@ -74,14 +74,16 @@
 						this.score+=10; 
 						this.isshow=true;
 						this.resulttext="恭喜，答对了，加十分";
-						this.correctrwords++;
+						this.correctwords++;
 						
 						this.userAnswer = "";
+						this.wordsnums++;
 					}else{
 							this.score-=5;
 							this.isshow=true;
-							this.resulttext="打错了，扣五分";
+							this.resulttext="答错了，扣五分";
 							this.wrongwords++;
+							this.wordsnums++;
 						}
 						this.disword();
 						this.userAnswer="";
