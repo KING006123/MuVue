@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<style>
+			img{
+					width: 300px;
+					height: 200px;
+				}
+				.box{
+					width: 200px;
+					height: 200px;
+					border: solid 1px blue;
+				}
+				.box2{
+					background-color: deepskyblue;
+				}
+				.box3
+				{
+					background-color: pink;
+				}
+			</style>
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<p>{{xm}}的简历——{{myinfo.school}}</p>
+			<hr />
+			<p>张三,你好</p>
+			<p>{{myinfo.name}},你好</p>
+			<p v-text="myinfo.school">清华大学</p>
+			<p v-text="myinfo.school2"></p>
+			<p v-html="myinfo.school2"></p>
+			<p v-if="!ifshow">{{msg}}</p>
+			<p v-else>{{msg3}}</p>
+			<p v-if="myinfo.age<=20">{{msg2}}</p>
+			<h3 v-show="ifshow2">{{msg}}</h3>
+			<input type="button" value="点击我" @click="btnclick()"/>
+			<!-- 指令6:v-bind:单向绑定,动态绑定一个或多个attribute,也可以是组件的prop -->
+			<img v-bind:src="imgurl">
+			<!-- v-bind:简写成: -->
+			<img :src="imgurl2"/>
+			
+			<!-- 指令7:v-on:给元素绑定事件监听器 -->
+			<input type="button" name="" id="" :value="btnvalue" v-on:click="changepic"/>
+			<!-- v-on可以缩写成@ -->
+			<input type="button" name="" id="" :value="btnvalue" @click="changepic2"/>
+			
+			<div class="box box2"></div>
+			<!--绑定class -->
+			<!-- 方法1:样式常量绑定方式v-bind:class="['class常量1','class常量2'....]" -->
+			<div v-bind:class="['box','box3']"></div>
+			<!-- 方法2:数据常量绑定方式v-bind:class="[数据变量1,数据变量2....]" -->
+			<div v-bind:class="[classa,classb]"></div>
+			<!-- 方法3:布尔值绑定方式 v-bind:class="{'class变量1':布尔变量(值),......}" -->
+			<div v-bind:class="{'box':ifshow,'box3':ifshow,'box2':!ifshow}"></div>
+			<!-- 方法4:混合式 -->
+			<div v-bind:class="['box',{'box3':!ifshow,'box2':ifshow}]"></div>
+			<hr>
+			<ul>
+				<li v-for="item in school.colloge">{{item}}</li>
+			</ul>
+			<hr />
+			<ul>
+				<li v-for="(item,index) in school.collage">
+				{{index}}-------{{item}}
+				<input type="button" value="删除" @click="remove(index)"/>
+				</li>
+			</ul>
+			<hr />
+			<li v-for="(value,key,index) in myinfo">
+				{{index}}-----{{key}}-----{{value}}
+			</li>
+			<input type="text" v-model:value="inputvalue"/>
+		</div>
+	<script type="text/javascript">
+		let vm=new Vue({
+			el:"#app", 
+			data:{
+				xh:'20240312117',
+				xm:'张三',
+				myinfo:{
+					id:'20240312239',
+							name:'李四',
+							age:20,
+							nativeplace:'江苏苏州',
+							tel:"11111111111",
+							address:'黄河南路399号',
+							school:"宿迁学院",
+							school2:"<a href='https://www.squ.edu.cn/'>宿迁学院</a>"
+						},
+						ifshow:true,
+						ifshow2:true,
+						msg:'我要交手机',
+						msg2:'我要好好学习',
+						msg3:'我们要好好反省',
+						imgurl:"img/jietu1.jpg",
+						imgurl2:"img/syjt.jpg",
+						btnvalue:"点击我",
+						classa:'box',
+						classb:'box2',
+						classc:'box3',
+						classd:'box4',
+						ifshow:true,
+						school:{
+							name:'宿迁学院',
+							collage:['经济管理学院','信息管理学院','建筑工程学院','机电工程学院']
+						},
+						inputvalue:'宿迁学院',
+					},
+					methods:{
+						btnclick(){
+							this.ifshow2=false;
+						},
+						remove(index){
+							this.school.collage.splice(index,1);
+						},
+						changepic(){
+							this.imgurl2=this.imgurl;
+						},
+						changepic2(){
+							this.imgurl=this.imgurl2;
+						}
+			}
+		})
+	</script>
+	</body>
+</html>

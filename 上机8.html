@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<zj1></zj1>
+			<zj2></zj2>
+			<zj3></zj3>
+		</div>
+		
+	</body>
+	<script type="text/javascript">
+		let component1={
+			template:"<p>欢迎来到24软件班</p>"
+		};
+		let component2={
+			template:"<div><h1>我是全局组件</h1><p>欢迎来到软件班</P></div>"
+		};
+		let component3={
+			template:"<p>我是局部组件</p>"
+		};
+		//注册组件（全局）
+		Vue.component("zj1",component1);
+		Vue.component("zj2",component2);
+		let vm=new Vue({
+			el:"#app",
+			data:{
+				
+			},
+			methods:{
+				
+			},
+			components:{
+				//局部组件的注册，键值对的生成
+				zj3:component3
+			}
+		})
+		let v2m=new Vue({
+			el:"#app2"
+		})
+	</script>
+</html>

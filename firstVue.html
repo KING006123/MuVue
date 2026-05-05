@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+<body>
+    <div id="app">
+        学号: <input type="text" name="" id="" v-bind:value="xh" />
+        姓名: <input type="text" name="" id="" v-bind:value="xm" /><br/>
+        请输入你的选择: <input id="syinput" type="text" v-bind:value="work" />
+        <input type="button" id="" value="点击更换选择" v-on:click="changeselect" /><br/>
+        <img v-bind:src="imgsrc" style="width: 200px; height: auto;" /><br/>
+        <input type="button"name="" id="" value="改变图片" v-on:click="changepic" />
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                xh: '20240312180',
+                xm: '熊猫2',
+                work: '工作',
+                imgsrc: 'img/jietu1.jpg'
+            },
+            methods: {
+                changeselect() {
+                    this.work = "考研";
+                },
+                changepic() {
+                    this.imgsrc = "img/syjt.jpg";
+                }
+            }
+        });
+    </script>
+</body>
+</html>

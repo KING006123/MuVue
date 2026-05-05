@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<span>{{num}}</span>
+			<button type="button" @click="addbtnclick">add</button>
+		</div>
+		<div id="app2"></div>
+		<script type="text/javascript">
+			let vm=new Vue({
+				el:'#app',
+				data:{
+					num:21
+				},
+				beforeCreate() { //Vue实例刚被创建出来，此时el data methos 并未初始化不能被调用
+					console.log("beforeCreaate函数开始");
+					console.log("num="+this.num);
+				},
+				created() {//在实例已经创建完成之后调用，但此时页面还没被渲染
+					console.log("create函数开始");
+					console.log("num="+this.num);
+				},
+				beforeMount() {
+					console.log("beforeMount函数开始");
+					console.log("num="+this.num);
+					console.log("el="+this.$el);
+				},
+				mounted() {
+					console.log("mounted函数开始");
+					console.log("num="+this.num);
+					console.log("el="this.$el);
+					//debugger;
+				},
+				beforeUpdate() {
+					console.log("mounted函数开始");
+					console.log("num="+this.num);
+					//debugger;
+				},
+				updated(){
+					console.log("mounted函数开始");
+					console.log("num="+this.num);
+					debugger;
+					},
+				methods:{
+					addbtnclick(){
+						this.num++;
+					}
+				},
+			})
+		</script>
+	</body>
+</html>

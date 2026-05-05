@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<!-- 1.Vue.js引入 -->
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<!-- 2.View部分 -->
+		<div id="app">
+			<!-- 指令1:插值表达式 {{}} -->
+			{{xm}}的简历——{{myinfo.school}}
+			<hr >
+			<!-- 指令2: v-text:设置标记元素的内容，默认替换全部内容，只能解析为本 -->
+			<p v-text="myinfo.name+'你好'"></p>
+			<p v-text="myinfo.school"></p>
+			<p v-text="myinfo.school2"></p>
+			
+			<!-- 指令3: v-html -->
+			<p v-html="myinfo.school2"></p>
+			
+			<!-- 指令4:v-if v-else:条件指令 -->
+			<h3>{{msg}}</h3>
+			<h3 v-if="!ifshow">{{msg2}}</h3>
+			<h3 v-else>{{msg3}}</h3>
+			
+			<!-- 指令5:v-show:基于表达式值的真假性,来改变元素的可见性 -->
+			<h3 v-show="!ifshow2">{{msg2}}</h3>
+			
+			<input type="button" value="点击我显示"@click="btnclick"/>
+		</div>
+		
+		<!-- 3.vm部分 -->
+		<script type="text/javascript">
+			let vm=new Vue({
+				el:"#app", 
+				data:{
+					xh:'20240312117',
+					xm:'徐腾',
+					myinfo:{
+						id:'20240312239',
+								name:'徐腾',
+								age:20,
+								nativeplace:'江苏苏州',
+								tel:"11111111111",
+								address:'黄河南路399号',
+								school:"宿迁学院",
+								school2:"<a href='https://www.squ.edu.cn/'>宿迁学院</a>"
+							},
+							ifshow:true,
+							ifshow2:true,
+							msg:'我要交手机',
+							msg2:'我要好好学习',
+							msg3:'我们要好好反省'
+						},
+						methods:{
+							btnclick(){
+								this.ifshow2=false;
+							}
+				}
+			})
+		</script>
+	</body>
+</html>
+					

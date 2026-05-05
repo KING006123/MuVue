@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<style>
+			img{
+				height: 100px;
+				width: 100px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<table cellspacing="" cellpadding="">
+				<tr v-for="(item,index) in carlist">
+					<td><input type="checkbox" v-model:checked="item.ischecked"@change="changechecked"/></td>
+					<td><img v-bind:src="item.pic"/></td>
+					<td>名称:{{item.title}}</td>
+					<td>¥:{{item.price}}</td>
+					<td>
+						<input type="button" value="+"@click="add(index)"/>
+						<input type="text" v-model="item.num"/>
+						<input type="button" value="-"@click="sub(index)"/>
+					</td>
+				</tr>
+			</table>
+			<div id="">
+				<input type="checkbox" v-model="isallchecked" @change="changeallchecked">全选
+				<span>总价:{{totalprice}}</span>
+			</div>
+				
+		</div>
+		<script type="text/javascript">
+			let vm= new Vue({
+				el:"#app",
+				data:{
+					carlist:[
+						{id:1,title:"408基础",price:200,pic:"img/OIP-C.jpg",num:1,ischecked:true},
+						{id:2,title:"408冲刺",price:80,pic:"img/OIP-C.jpg",num:1,ischecked:false},
+						{id:3,title:"408基础",price:90,pic:"img/OIP-C.jpg",num:1,ischecked:false},
+					],
+					isallchecked:false,
+					totalprice:0,
+					maxnum:5,
+					
+				},
+				
+				mounted() {
+					this.gettotalprice();
+				},
+				methods:{
+					gettotalprice(){
+						 let totalprice = 0
+						for(let item of this.carlist){
+							if(item.ischecked){
+								totalprice+=item.price*item.num;
+							}
+						}
+						this.totalprice=totalprice;
+					},
+					changeallchecked(){
+						   for(let item of this.carlist ){
+								item.ischecked=this.isallchecked;
+							}
+							this.gettotalprice();
+						},
+					changechecked(){//每个小复选框
+					this.gettotalprice();
+						let n=0;
+						for(let item of this.carlist){
+							if(item.ischecked){
+								n++;
+							}
+						}
+						if(n==this.carlist.length)//三个小复选框都被勾选
+						{this.isallchecked=true;}
+						else{
+							this.isallchecked=false;
+						}
+					},
+					add(index){
+						if(this.carlist[index].num<this.maxnum){
+							this.carlist[index].num++;
+						}
+						else{
+							alert("已达到最大购买数量");
+						}
+						if(this.carlist[index].ischecked){
+							this.gettotalprice();
+						}
+					},
+					sub(index){
+						if(this.carlist[index].num>0)
+						{this.carlist[index].num--;
+						this.gettotalprice();}
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<!-- 1.Vue.js引入 -->
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<!-- <ul>
+				<li>{{school.colleges[0]}}</li>
+				<li>{{school.colleges[1]}}</li>
+				<li>{{school.colleges[2]}}</li>
+				<li>{{school.colleges[3]}}</li>
+			</ul> !-->
+			<!-- 指令8:v-for 循环指令 -->
+			<ul>
+				<li>*</li>
+				<li v-for="item in school.colleges">{{item}}</li>
+			</ul>
+			<hr />
+			<ul>
+				<li v-for="(item,index) in school.colleges">
+				{{index+1}}-------{{item}}
+				<input type="button" value="删除" @click="remove(index)"/></li>
+			</ul>
+			<hr />
+			<ul>
+				<li v-for="(value,key,index) in myinfo">
+					{{index+1}}---{{key}}-----{{value}}
+				</li>
+			</ul>
+			<!-- 指令9:v-model 双向数据绑定 -->
+			<input type="text" v-model:value="inputvalue"/>
+		</div>
+	</body>
+	<script type="text/javascript">
+		let vm=new Vue({
+			el:'#app',
+			data:{
+				school:{
+					name:'宿迁学院',
+					colleges:['经济管理学院','信息工程学院','建筑工程学院','机电工程学院']
+				},
+				myinfo:{
+					id:'20240312239',
+							name:'徐腾',
+							age:20,
+							nativeplace:'江苏苏州',
+							tel:"11111111111",
+							address:'黄河南路399号',
+							school:"宿迁学院",
+							school2:"<a href='https://www.squ.edu.cn/'>宿迁学院</a>"
+						}
+			},
+			methods:{
+				remove(index){
+					this.school.colleges.splice(index,1);
+				}
+			}
+		})
+	</script>
+</html>

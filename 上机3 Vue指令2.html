@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<!-- 1.Vue.js引入 -->
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<style>
+			img{
+				width: 300px;
+				height: 200px;
+			}
+			.box{
+				width: 200px;
+				height: 200px;
+				border: solid 1px blue;
+			}
+			.box2{
+				background-color: deepskyblue;
+			}
+			.box3
+			{
+				background-color: pink;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<!-- 指令6:v-bind:单向绑定,动态绑定一个或多个attribute,也可以是组件的prop -->
+			<img v-bind:src="imgurl">
+			<!-- v-bind:简写成: -->
+			<img :src="imgurl2"/>
+			
+			<!-- 指令7:v-on:给元素绑定事件监听器 -->
+			<input type="button" name="" id="" :value="btnvalue" v-on:click="changepic"/>
+			<!-- v-on可以缩写成@ -->
+			<input type="button" name="" id="" :value="btnvalue" @click="changepic2"/>
+			
+			<div class="box box2"></div>
+			<!--绑定class -->
+			<!-- 方法1:样式常量绑定方式v-bind:class="['class常量1','class常量2'....]" -->
+			<div v-bind:class="['box','box3']"></div>
+			<!-- 方法2:数据常量绑定方式v-bind:class="[数据变量1,数据变量2....]" -->
+			<div v-bind:class="[classa,classb]"></div>
+			<!-- 方法3:布尔值绑定方式 v-bind:class="{'class变量1':布尔变量(值),......}" -->
+			<div v-bind:class="{'box':ifshow,'box3':ifshow,'box2':!ifshow}"></div>
+			<!-- 方法4:混合式 -->
+			<div v-bind:class="['box',{'box3':!ifshow,'box2':ifshow}]"></div>
+		</div>
+		<!-- 3.vm部分 -->
+		<script type="text/javascript">
+			let vm=new Vue({
+				el:"#app", 
+				data:{
+					imgurl:'img/jietu1.jpg',
+					imgurl2:'img/syjt.jpg',
+					btnvalue:'点击我',
+					classa:'box',
+					classb:'box2',
+					classc:'box3',
+					ifshow:true
+						},
+				methods:{
+			        changepic(){
+						this.imgurl2=this.imgurl;
+					},
+					changepic2(){
+						this.imgurl=this.imgurl2;
+					}
+							
+				}
+			})
+		</script>
+	</body>
+</html>
+					

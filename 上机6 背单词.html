@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="css/上机6.css"/>
+	</head>
+	<body>
+		<div id="app">
+				<div class="container">
+					<h1>快乐背单词</h1>
+					<div id="" v-if="!ifstart">
+					<button type="button" @click="startclick()">开始</button>
+					</div>
+					
+					<div v-else>
+						<div class="score-time">
+							<div id="">得分:{{score}}</div>
+							<div id="">时间:{{timeleft}}</div>
+						</div>
+						
+						<div class="score-time">
+							<div id="">单词个数:{{wordsnums}}</div> &nbsp;&nbsp;
+							<div id="">正确单词数:{{correctwords}}</div>&nbsp;&nbsp;
+							<div id="">错误单词数:{{wrongwords}}</div>
+						</div>
+						
+						<div class="word-display">
+							{{currentword.en}}
+						</div>
+							<input type="text"  placeholder="请输入中文" v-model="userAnswer"  @keyup.enter="checkAnswer">
+							<div v-show="isshow">
+								{{resulttext}}
+							</div>
+					</div>
+				</div>
+		</div>
+		<script type="text/javascript">
+			let vm=new Vue({
+				el:'#app',
+				data:{
+					words:[
+						{en:"study",cn:"学习"},
+						{en:"student",cn:"学生"},
+						{en:"scholar",cn:"学者"},
+						{en:"transform",cn:"改变"}
+					],
+					ifstart:false,
+					score:0,
+					currentword:null,
+					timeleft:30,
+					userAnswer:"",
+					isshow:false,
+					resulttext:'',
+					wordsnums:0,
+					correctwords:0,
+					wrongwords:0,
+					timeid:null
+				},
+				methods:{
+					startclick(){
+						this.ifstart=true;
+						this.disword();
+						this.startTime();
+					},
+					disword(){
+						let index = Math.floor(Math.random() * this.words.length);
+						console.log(index);
+						 this.currentword = this.words[index];
+					},
+					checkAnswer(){
+						if(this.userAnswer == this.currentword.cn){
+						this.score+=10; 
+						this.isshow=true;
+						this.resulttext="恭喜，答对了，加十分";
+						this.correctrwords++;
+						
+						this.userAnswer = "";
+					}else{
+							this.score-=5;
+							this.isshow=true;
+							this.resulttext="打错了，扣五分";
+							this.wrongwords++;
+						}
+						this.disword();
+						this.userAnswer="";
+					}
+				},
+				startTime(){
+					this.timeid=setInterval(()=>{
+						if(this.timeleft>0){
+							this.timeleft--;
+						}
+						else{
+							clearInterval(this.timeid);
+						}
+					},1000);
+				}
+			})
+		</script>
+	</body>
+</html>
