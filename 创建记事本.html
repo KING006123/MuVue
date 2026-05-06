@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>记事本</title>
+		<script src="js/vue.js"></script>
+	</head>
+	<body>
+		<div id="div1">
+			<head>
+				<h1>PP的记事本</h1>
+				<input @keyup.enter="add" type="text" v-model="textvalue"/>
+			</head>
+			<div id="">
+				<ul style="list-style: none;">
+				<li v-for="(item,index) in list">
+						<span id="">{{index+1}}.</span>
+						<label>{{item}}</label>
+						<button type="button" style="color: #ff0000;" @click="remove(index)">X</button>
+					</li>
+				</ul>
+			</div>
+			<footer>
+				<span id="">{{list.length}}条数据</span>
+				<button @click="clear()">清空</button>
+			</footer>
+		</div>
+		<script>
+			var app = new Vue({
+				el: "#div1",
+				data: {
+					textvalue: "",
+					list: ["学习", "吃饭", "游戏"]
+				},
+				methods: {
+					add() {
+						if (this.textvalue.trim()) {
+							this.list.push(this.textvalue);
+							this.textvalue = "";
+						}
+					},
+					remove(index) {
+						if (confirm("确定要删除这条记录吗？")) {
+							this.list.splice(index, 1);
+						}
+					},
+					clear() {
+						this.list = [];
+					}
+				}
+			});
+		</script>
+	</body>
+</html>
